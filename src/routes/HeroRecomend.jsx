@@ -6,12 +6,12 @@ import { useContext } from "react";
 import AuthContext from "../AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
-const Hero = () => {
+const HeroRecomend = () => {
   const navigate = useNavigate();
-  const { baseUrl } = useContext(AuthContext);
+  const { baseUrl, token } = useContext(AuthContext);
   const PostLoadingComponent = ComponentLoading(Posts),
     { appState, getNextPage, getInitialPage } = useFetchData(
-      baseUrl + "animals/"
+      baseUrl + `animals/recommendations/${token.id}`
     );
   const hasPrevious = appState.previous !== null,
     hasNext = appState.next !== null;
@@ -63,4 +63,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroRecomend;

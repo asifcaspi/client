@@ -11,52 +11,28 @@ import { AiOutlineCiCircle } from "react-icons/ai";
 import { Rings } from "react-loader-spinner";
 import error_img from "../assets/404_Error-rafiki.svg";
 import Skeleton from "react-loading-skeleton";
+import { useNavigate } from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination]);
 
 const Product = () => {
-  const { baseUrl } = useContext(AuthContext);
+  const { baseUrl, token } = useContext(AuthContext);
   const [animal, setAnimal] = useState([]);
   const [loading, setLoading] = useState(true);
   const [image_loaded, setImageLoaded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const { message, showMessage } = useMessage(4000);
-  const [ordering, setOrdering] = useState(false);
+  const { message } = useMessage(4000);
+  const [ordering] = useState(false);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  console.log(animal);
+
+  const recommendation = animal?.recommendations?.find(
+    (recomm) => recomm.user_id == token.id
+  );
 
   const handleAddToCart = () => {
-    if (quantity === 0) {
-      showMessage({ text: "please enter a valid quantity", type: "error" });
-      return;
-    }
-    setOrdering(true);
-    axiosInstance
-      .post(baseUrl + "api/orders/", {
-        product: id,
-        quantity: quantity,
-      })
-      .then(() => {
-        showMessage({
-          text: `${quantity} of ${animal.name} Added to cart`,
-          type: "success",
-        });
-      })
-      .catch((err) => {
-        if (err.response === undefined) {
-          showMessage({
-            text: "something went wrong try again later",
-            type: "error",
-          });
-        } else {
-          showMessage({ text: err.response.data.message, type: "error" });
-        }
-      })
-      .finally(() => {
-        setOrdering(false);
-      });
+    navigate(`/chat/${animal.uploaded_by?.id}`);
   };
 
   const getProduct = () => {
@@ -149,6 +125,14 @@ const Product = () => {
             <p className="text-lg font-medium text-gray-700 mb-6 text-right">
               {animal.description}
             </p>
+
+            {recommendation && (
+              <><p className="text-lg font-medium text-yellow-500 text-right">
+              סיבת ההמלצה
+            </p><p className="text-lg font-medium text-gray-700 mb-6 text-right">
+              {recommendation.reason} 
+            </p></>
+            )}
             <button
               className="active-btn md:self-center"
               onClick={handleAddToCart}

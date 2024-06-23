@@ -7,7 +7,7 @@ export default AuthContext;
 
 export const AuthContextProvider = ({ children }) => {
   const [username, setUsername] = useState(localStorage.getItem("username"));
-  const [token, setToken] = useState({ username: "ohad", id: "1" });
+  const [token, setToken] = useState({ username: "ohad", id: "6" });
   const [debug, setDebug] = useState(true);
 
   const baseUrl = debug ? "http://127.0.0.1:3000/" : "/";

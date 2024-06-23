@@ -4,7 +4,7 @@ import AuthContext from "../AuthContext.jsx";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import LoginForm from "../components/LoginForm.jsx";
 import {useMessage} from "../hooks/useMessage.jsx";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 const login = () => {
     const { message, showMessage } = useMessage(4000);
@@ -25,30 +25,30 @@ const login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axiosInstance
-            .post(`${baseUrl}api/token/`, {
-                email: formData.email,
-                password: formData.password,
-            })
-            .then((res) => {
-                    localStorage.setItem("refresh_token", res.data.refresh);
-                    axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
-                    setToken(res.data.access);
-            }).catch(() => {
-                showMessage({text: "Invalid credentials", type: "error"});
-        });
+        // axiosInstance
+        //     .post(`${baseUrl}api/token/`, {
+        //         email: formData.email,
+        //         password: formData.password,
+        //     })
+        //     .then((res) => {
+        //             localStorage.setItem("refresh_token", res.data.refresh);
+        //             axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+        //             setToken(res.data.access);
+        //     }).catch(() => {
+        //         showMessage({text: "Invalid credentials", type: "error"});
+        // });
         setFormData(initialFormData);
     }
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (token !== null) {
-            const tokenParts = jwt_decode(token);
-            const now = Math.ceil(Date.now() / 1000);
-            if (tokenParts.exp < now) {
-                setToken(null);
-            } else navigate("/")
-        }
-    }, [token])
+    //     if (token !== null) {
+    //         const tokenParts = jwt_decode(token);
+    //         const now = Math.ceil(Date.now() / 1000);
+    //         if (tokenParts.exp < now) {
+    //             setToken(null);
+    //         } else navigate("/")
+    //     }
+    // }, [token])
 
     return (
         <>

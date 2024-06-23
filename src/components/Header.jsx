@@ -41,7 +41,7 @@ const Header = () => {
                 </p>
                 <div className='flex gap-5 items-center'>
                     {pathname === '/' &&
-                        <SearchField placeHolder='Search' data={data} goSearch={goSearch} search={search}/>
+                        <SearchField placeHolder='חפש' data={data} goSearch={goSearch} search={search}/>
                     }
                     <Link className='nav-item flex items-center gap-1.5' to="/profile">
                         <IoPersonOutline />

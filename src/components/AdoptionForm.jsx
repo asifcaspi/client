@@ -39,11 +39,22 @@ const AdoptionForm = ({ handleSubmit, formData, handleChange }) => {
           type="text"
           onChange={handleChange}
           name="image"
-          placeholder="קישור לתמונה"
+          placeholder="העלה תמונה"
           id="image"
           required
           className="form-item"
         />
+
+        {/* <input
+          value={formData.image}
+          placeholder="העלה תמונה"
+          type="file"
+          onChange={handleChange}
+          name="image"
+          id="image"
+          required
+          className="form-item"
+        /> */}
 
         <input
           value={formData.age}

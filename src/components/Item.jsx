@@ -22,6 +22,7 @@ const Item = ({ post, isUser }) => {
 
   const animalPronounce = post.sex === "male" ? "בן" : "בת";
 
+
   const handelLikeClick = () => {
     axiosInstance
       .patch(
@@ -62,7 +63,9 @@ const Item = ({ post, isUser }) => {
       )}
       <li
         dir="rtl"
-        className="flex flex-col gap-2 rounded p-6 border shadow justify-between "
+        className={`flex flex-col gap-2 rounded p-6 border shadow justify-between ${post.recommendations.find(
+          (recomm) => recomm.user_id == token.id
+        ) && 'bg-yellow-200'}`}
       >
         <figure
           dir="rtl"
@@ -98,12 +101,21 @@ const Item = ({ post, isUser }) => {
             <p className="text-gray-700 px-2 mt-1 text-sm line-clamp-2 text-right">
               תיאור {post.description}
             </p>
+
             <a
               href="http://localhost:5173/profile"
               className="text-gray-700  px-2 mt-1 text-sm line-clamp-2 text-right"
             >
               פורסם על ידי {post.uploaded_by?.user_name}
             </a>
+
+            {post.recommendations.find(
+              (recomm) => recomm.user_id == token.id
+            ) && (
+              <p className="text-gray-700 px-2 mt-1 text-sm line-clamp-2 text-right font-bold">
+                מומלץ עבורך
+              </p>
+            )}
           </>
         ) : (
           <p className="text-gray-700 px-2 mt-2 text-sm line-clamp-2 text-right">

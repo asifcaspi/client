@@ -7,10 +7,10 @@ const RegisterForm = ({ handleSubmit, formData, handleChange }) => {
           type="text"
           onChange={handleChange}
           name="username"
-          placeholder="Username"
+          placeholder="שם משתמש"
           id="username"
           required
-          className="form-item"
+          className="form-item text-right"
         />
         <input
           value={formData.email}
@@ -18,10 +18,10 @@ const RegisterForm = ({ handleSubmit, formData, handleChange }) => {
           onChange={handleChange}
           autoComplete="email"
           name="email"
-          placeholder="Email"
+          placeholder="אימייל"
           id="email"
           required
-          className="form-item"
+          className="form-item text-right"
         />
         <input
           type="password"
@@ -29,10 +29,10 @@ const RegisterForm = ({ handleSubmit, formData, handleChange }) => {
           onChange={handleChange}
           autoComplete="current-password"
           name="password"
-          placeholder="Password"
+          placeholder="סיסמה"
           id="password"
           required
-          className="form-item"
+          className="form-item text-right"
         />
         <button
           onClick={handleSubmit}

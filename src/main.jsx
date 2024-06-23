@@ -11,6 +11,7 @@ import {
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Hero from "./routes/Hero.jsx";
+import HeroRecomend from "./routes/HeroRecomend.jsx";
 import Login from "./routes/Login.jsx";
 import Register from "./routes/Register.jsx";
 import Profile from "./routes/Profile.jsx";
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path={"/profile"} element={<Profile />} />
       <Route path={"/adoption"} element={<Adoption />} />
       <Route path={"/"} element={<Hero />} index={true} />
+      <Route path={"/recommendations"} element={<HeroRecomend />} />
       <Route path={"/:id"} element={<Product />} />
       <Route path={"/chat/:id"} element={<Chat />} /> 
     </Route>,
